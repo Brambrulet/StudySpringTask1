@@ -6,13 +6,8 @@ import ru.volnenko.se.command.AbstractCommand;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("project-remove")
 public final class ProjectRemoveCommand implements AbstractCommand {
-
-    @Override
-    public String command() {
-        return "project-remove";
-    }
 
     @Override
     public String description() {

@@ -9,15 +9,10 @@ import ru.volnenko.se.command.AbstractCommand;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("task-remove")
 @Setter(onMethod=@__({@Autowired}))
 public final class TaskRemoveCommand implements AbstractCommand {
     private IConsoleService console;
-
-    @Override
-    public String command() {
-        return "task-remove";
-    }
 
     @Override
     public String description() {

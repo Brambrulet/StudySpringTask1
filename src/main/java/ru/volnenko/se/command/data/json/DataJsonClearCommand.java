@@ -10,13 +10,8 @@ import java.nio.file.Files;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("data-json-clear")
 public final class DataJsonClearCommand implements AbstractCommand {
-
-    @Override
-    public String command() {
-        return "data-json-clear";
-    }
 
     @Override
     public String description() {

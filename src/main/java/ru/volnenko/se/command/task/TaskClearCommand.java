@@ -9,7 +9,7 @@ import ru.volnenko.se.command.AbstractCommand;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("task-clear")
 @Setter(onMethod=@__({@Autowired}))
 public final class TaskClearCommand implements AbstractCommand {
     private ITaskRepository taskRepository;
@@ -17,11 +17,6 @@ public final class TaskClearCommand implements AbstractCommand {
     @Override
     public String description() {
         return "Remove all tasks.";
-    }
-
-    @Override
-    public String command() {
-        return "task-clear";
     }
 
     @Override

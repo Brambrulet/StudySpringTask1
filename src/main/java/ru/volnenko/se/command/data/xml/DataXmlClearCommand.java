@@ -10,13 +10,8 @@ import java.nio.file.Files;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("data-xml-clear")
 public final class DataXmlClearCommand implements AbstractCommand {
-
-    @Override
-    public String command() {
-        return "data-xml-clear";
-    }
 
     @Override
     public String description() {

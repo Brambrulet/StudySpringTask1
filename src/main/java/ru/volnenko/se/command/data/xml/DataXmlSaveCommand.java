@@ -11,16 +11,11 @@ import ru.volnenko.se.constant.DataConstant;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("data-xml-save")
 @Setter(onMethod=@__({@Autowired}))
 @Getter
 public final class DataXmlSaveCommand extends AbstractSaveCommand {
     private IDomainService domainService;
-
-    @Override
-    public String command() {
-        return "data-xml-save";
-    }
 
     @Override
     public String description() {

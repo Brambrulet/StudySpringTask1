@@ -1,9 +1,9 @@
 package ru.volnenko.se.controller;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import ru.volnenko.se.api.service.IBootstrap;
@@ -17,32 +17,22 @@ import ru.volnenko.se.error.CommandCorruptException;
  * @author Denis Volnenko
  */
 @Controller
+@Setter(onMethod=@__({@Autowired}))
 public final class Bootstrap implements IBootstrap {
-    private final Map<String, AbstractCommand> commands = new LinkedHashMap<>();
+    @Getter
+    private Map<String, AbstractCommand> commands;
     private IConsoleService consoleService;
 
-    @Autowired
-    void setCommands(List<AbstractCommand> commands) {
-        this.commands.putAll(commands.stream().collect(Collectors.toMap(AbstractCommand::command, this::validateCommand)));
-    }
-
-    @Autowired
-    public void setConsoleService(IConsoleService consoleService) {
-        this.consoleService = consoleService;
-    }
-
-    private AbstractCommand validateCommand(final AbstractCommand command) {
-        final String cliCommand = command.command();
+    private void validateCommand(String commandString, final AbstractCommand command) {
         final String cliDescription = command.description();
-        if (cliCommand == null || cliCommand.isEmpty()) throw new CommandCorruptException();
+        if (commandString == null || commandString.isEmpty()) throw new CommandCorruptException();
         if (cliDescription == null || cliDescription.isEmpty()) throw new CommandCorruptException();
-
-        return command;
     }
 
     @Override
     public void start() throws Exception {
         if (commands.isEmpty()) throw new CommandAbsentException();
+        commands.forEach(this::validateCommand);
 
         System.out.println("*** WELCOME TO TASK MANAGER ***");
         String command = "";

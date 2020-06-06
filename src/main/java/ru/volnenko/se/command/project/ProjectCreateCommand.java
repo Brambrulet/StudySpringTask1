@@ -10,7 +10,7 @@ import ru.volnenko.se.command.AbstractCommand;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("project-create")
 @Setter(onMethod=@__({@Autowired}))
 public final class ProjectCreateCommand implements AbstractCommand {
     private IConsoleService console;
@@ -19,11 +19,6 @@ public final class ProjectCreateCommand implements AbstractCommand {
     @Override
     public String description() {
         return "Create new project.";
-    }
-
-    @Override
-    public String command() {
-        return "project-create";
     }
 
     @Override

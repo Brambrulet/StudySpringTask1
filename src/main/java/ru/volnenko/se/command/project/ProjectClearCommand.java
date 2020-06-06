@@ -9,15 +9,10 @@ import ru.volnenko.se.command.AbstractCommand;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("project-clear")
 @Setter(onMethod=@__({@Autowired}))
 public final class ProjectClearCommand implements AbstractCommand {
     private ITaskRepository taskRepository;
-
-    @Override
-    public String command() {
-        return "project-clear";
-    }
 
     @Override
     public String description() {

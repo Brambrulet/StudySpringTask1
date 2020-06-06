@@ -16,16 +16,11 @@ import java.io.ObjectInputStream;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("data-bin-load")
 @Setter(onMethod=@__({@Autowired}))
 public final class DataBinaryLoadCommand implements AbstractCommand {
     private IProjectService projectService;
     private ITaskService taskService;
-
-    @Override
-    public String command() {
-        return "data-bin-load";
-    }
 
     @Override
     public String description() {

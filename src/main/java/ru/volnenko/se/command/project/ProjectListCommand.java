@@ -10,15 +10,10 @@ import ru.volnenko.se.entity.Project;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("project-list")
 @Setter(onMethod=@__({@Autowired}))
 public final class ProjectListCommand implements AbstractCommand {
     private IProjectService projectService;
-
-    @Override
-    public String command() {
-        return "project-list";
-    }
 
     @Override
     public String description() {

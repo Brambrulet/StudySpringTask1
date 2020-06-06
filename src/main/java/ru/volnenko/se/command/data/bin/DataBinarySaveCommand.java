@@ -18,16 +18,11 @@ import java.nio.file.Files;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("data-bin-save")
 @Setter(onMethod=@__({@Autowired}))
 public final class DataBinarySaveCommand implements AbstractCommand {
     private IProjectService projectService;
     private ITaskService taskService;
-
-    @Override
-    public String command() {
-        return "data-bin-save";
-    }
 
     @Override
     public String description() {

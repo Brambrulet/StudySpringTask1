@@ -10,13 +10,8 @@ import java.nio.file.Files;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("data-bin-clear")
 public final class DataBinaryClearCommand implements AbstractCommand {
-
-    @Override
-    public String command() {
-        return "data-bin-clear";
-    }
 
     @Override
     public String description() {

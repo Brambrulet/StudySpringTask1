@@ -10,15 +10,10 @@ import ru.volnenko.se.entity.Task;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("task-list")
 @Setter(onMethod=@__({@Autowired}))
 public final class TaskListCommand implements AbstractCommand {
     private ITaskRepository taskRepository;
-
-    @Override
-    public String command() {
-        return "task-list";
-    }
 
     @Override
     public String description() {

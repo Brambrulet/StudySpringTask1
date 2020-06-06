@@ -10,16 +10,11 @@ import ru.volnenko.se.repository.TaskRepository;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("task-create")
 @Setter(onMethod=@__({@Autowired}))
 public final class TaskCreateCommand implements AbstractCommand {
     private IConsoleService console;
     private TaskRepository taskRepository;
-
-    @Override
-    public String command() {
-        return "task-create";
-    }
 
     @Override
     public String description() {

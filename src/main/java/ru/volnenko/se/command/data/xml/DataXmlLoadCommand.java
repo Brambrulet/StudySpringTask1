@@ -12,16 +12,11 @@ import ru.volnenko.se.command.AbstractLoadCommand;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("data-xml-load")
 @Setter(onMethod=@__({@Autowired}))
 @Getter
 public final class DataXmlLoadCommand extends AbstractLoadCommand {
     private IDomainService domainService;
-
-    @Override
-    public String command() {
-        return "data-xml-load";
-    }
 
     @Override
     public String description() {

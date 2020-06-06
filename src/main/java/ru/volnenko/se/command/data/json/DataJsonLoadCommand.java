@@ -11,16 +11,11 @@ import ru.volnenko.se.command.AbstractLoadCommand;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("data-json-load")
 @Setter(onMethod=@__({@Autowired}))
 @Getter
 public final class DataJsonLoadCommand extends AbstractLoadCommand {
     private IDomainService domainService;
-
-    @Override
-    public String command() {
-        return "data-json-load";
-    }
 
     @Override
     public String description() {

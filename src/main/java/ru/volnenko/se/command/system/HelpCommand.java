@@ -1,23 +1,18 @@
 package ru.volnenko.se.command.system;
 
-import java.util.List;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.volnenko.se.api.service.IBootstrap;
 import ru.volnenko.se.command.AbstractCommand;
 
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("help")
 @Setter(onMethod=@__({@Autowired}))
 public final class HelpCommand implements AbstractCommand {
-    private List<AbstractCommand> commands;
-
-    @Override
-    public String command() {
-        return "help";
-    }
+    private IBootstrap bootstrap;
 
     @Override
     public String description() {
@@ -26,9 +21,11 @@ public final class HelpCommand implements AbstractCommand {
 
     @Override
     public void execute() {
-        for (AbstractCommand command: commands) {
-            System.out.println(command.command()+ ": " + command.description());
-        }
+        bootstrap.getCommands().forEach(this::printCommandInfo);
+    }
+
+    private void printCommandInfo(String key, AbstractCommand command) {
+        System.out.println(key + ": " + command.description());
     }
 
 }

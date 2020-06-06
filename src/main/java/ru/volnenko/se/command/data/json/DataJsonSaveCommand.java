@@ -11,16 +11,11 @@ import ru.volnenko.se.constant.DataConstant;
 /**
  * @author Denis Volnenko
  */
-@Service
+@Service("data-json-save")
 @Setter(onMethod=@__({@Autowired}))
 @Getter
 public final class DataJsonSaveCommand extends AbstractSaveCommand {
     private IDomainService domainService;
-
-    @Override
-    public String command() {
-        return "data-json-save";
-    }
 
     @Override
     public String description() {

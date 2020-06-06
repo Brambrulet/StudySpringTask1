@@ -1,5 +1,7 @@
 package ru.volnenko.se.service;
 
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.volnenko.se.api.repository.IProjectRepository;
 import ru.volnenko.se.entity.Project;
@@ -11,13 +13,10 @@ import java.util.List;
  * @author Denis Volnenko
  */
 @Service
+@Setter(onMethod=@__({@Autowired}))
 public final class ProjectService implements ru.volnenko.se.api.service.IProjectService {
 
-    private final IProjectRepository projectRepository;
-
-    public ProjectService(final IProjectRepository projectRepository) {
-        this.projectRepository = projectRepository;
-    }
+    private IProjectRepository projectRepository;
 
     @Override
     public Project createProject(final String name) {
