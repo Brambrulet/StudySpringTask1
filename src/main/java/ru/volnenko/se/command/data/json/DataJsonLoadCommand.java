@@ -4,17 +4,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import ru.volnenko.se.api.service.IDomainService;
-import ru.volnenko.se.command.AbstractLoadCommand;
+import ru.volnenko.se.api.component.AsyncAbstractLoadCommand;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
-@Service("data-json-load")
+@Component("data-json-load")
 @Setter(onMethod=@__({@Autowired}))
 @Getter
-public final class DataJsonLoadCommand extends AbstractLoadCommand {
+public final class DataJsonLoadCommand extends AsyncAbstractLoadCommand {
+
     private IDomainService domainService;
 
     @Override

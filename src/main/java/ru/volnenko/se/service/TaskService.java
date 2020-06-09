@@ -14,10 +14,12 @@ import java.util.List;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
 @Service
 @Setter(onMethod=@__({@Autowired}))
 public final class TaskService implements ITaskService {
+
     private ITaskRepository taskRepository;
     private IProjectRepository projectRepository;
 

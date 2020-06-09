@@ -2,17 +2,20 @@ package ru.volnenko.se.command.system;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import ru.volnenko.se.api.service.IBootstrap;
-import ru.volnenko.se.command.AbstractCommand;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Component;
+import ru.volnenko.se.api.component.AbstractCommand;
+import ru.volnenko.se.api.component.AsyncAbstractCommand;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
-@Service("help")
+@Component("help")
 @Setter(onMethod=@__({@Autowired}))
-public final class HelpCommand implements AbstractCommand {
-    private IBootstrap bootstrap;
+public class HelpCommand implements AsyncAbstractCommand {
+
+    private ApplicationContext context;
 
     @Override
     public String description() {
@@ -21,11 +24,12 @@ public final class HelpCommand implements AbstractCommand {
 
     @Override
     public void execute() {
-        bootstrap.getCommands().forEach(this::printCommandInfo);
+        System.out.println(Thread.currentThread().getName());
+        context.getBeansOfType(AbstractCommand.class).forEach(this::printCommandInfo);
     }
 
-    private void printCommandInfo(String key, AbstractCommand command) {
-        System.out.println(key + ": " + command.description());
+    private void printCommandInfo(String command, AbstractCommand bean) {
+        System.out.println(command + ": " + bean.description());
     }
 
 }

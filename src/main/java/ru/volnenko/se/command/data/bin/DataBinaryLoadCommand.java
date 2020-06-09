@@ -1,24 +1,25 @@
 package ru.volnenko.se.command.data.bin;
 
+import java.io.FileInputStream;
+import java.io.ObjectInputStream;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+import ru.volnenko.se.api.component.AsyncAbstractCommand;
 import ru.volnenko.se.api.service.IProjectService;
 import ru.volnenko.se.api.service.ITaskService;
-import ru.volnenko.se.command.AbstractCommand;
 import ru.volnenko.se.constant.DataConstant;
 import ru.volnenko.se.entity.Project;
 import ru.volnenko.se.entity.Task;
 
-import java.io.FileInputStream;
-import java.io.ObjectInputStream;
-
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
-@Service("data-bin-load")
+@Component("data-bin-load")
 @Setter(onMethod=@__({@Autowired}))
-public final class DataBinaryLoadCommand implements AbstractCommand {
+public final class DataBinaryLoadCommand implements AsyncAbstractCommand {
+
     private IProjectService projectService;
     private ITaskService taskService;
 

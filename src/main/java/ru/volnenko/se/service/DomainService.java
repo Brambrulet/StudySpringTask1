@@ -10,10 +10,12 @@ import ru.volnenko.se.entity.Domain;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
 @Service
 @Setter(onMethod=@__({@Autowired}))
 public final class DomainService implements IDomainService {
+
     private IProjectService projectService;
     private ITaskService taskService;
 
