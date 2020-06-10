@@ -1,13 +1,13 @@
 package ru.volnenko.se.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Data;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
 
 @Data

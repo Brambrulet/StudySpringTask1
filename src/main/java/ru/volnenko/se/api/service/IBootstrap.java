@@ -1,12 +1,10 @@
 package ru.volnenko.se.api.service;
 
-import java.util.Map;
-import ru.volnenko.se.command.AbstractCommand;
-
+/**
+ * @author Shmelev Dmitry
+ */
 public interface IBootstrap {
 
-    void start() throws Exception;
-
-    Map<String, AbstractCommand> getCommands();
+    void start();
 
 }

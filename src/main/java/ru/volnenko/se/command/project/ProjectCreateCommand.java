@@ -2,18 +2,20 @@ package ru.volnenko.se.command.project;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import ru.volnenko.se.api.repository.IProjectRepository;
-import ru.volnenko.se.api.service.IConsoleService;
-import ru.volnenko.se.command.AbstractCommand;
+import ru.volnenko.se.api.component.IInputProvider;
+import ru.volnenko.se.api.component.AbstractCommand;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
-@Service("project-create")
+@Component("project-create")
 @Setter(onMethod=@__({@Autowired}))
 public final class ProjectCreateCommand implements AbstractCommand {
-    private IConsoleService console;
+
+    private IInputProvider input;
     private IProjectRepository projectRepository;
 
     @Override
@@ -25,7 +27,7 @@ public final class ProjectCreateCommand implements AbstractCommand {
     public void execute() {
         System.out.println("[PROJECT CREATE]");
         System.out.println("ENTER NAME:");
-        final String name = console.nextLine();
+        final String name = input.nextLine();
         projectRepository.createProject(name);
         System.out.println("[OK]");
         System.out.println();

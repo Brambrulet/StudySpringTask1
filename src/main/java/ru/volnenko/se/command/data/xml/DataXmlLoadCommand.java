@@ -5,17 +5,19 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 import ru.volnenko.se.api.service.IDomainService;
-import ru.volnenko.se.command.AbstractLoadCommand;
+import ru.volnenko.se.api.component.AsyncAbstractLoadCommand;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
-@Service("data-xml-load")
+@Component("data-xml-load")
 @Setter(onMethod=@__({@Autowired}))
 @Getter
-public final class DataXmlLoadCommand extends AbstractLoadCommand {
+public final class DataXmlLoadCommand extends AsyncAbstractLoadCommand {
+
     private IDomainService domainService;
 
     @Override

@@ -2,17 +2,20 @@ package ru.volnenko.se.command.task;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import ru.volnenko.se.api.service.IConsoleService;
-import ru.volnenko.se.command.AbstractCommand;
+import org.springframework.stereotype.Component;
+import ru.volnenko.se.api.component.AbstractCommand;
+import ru.volnenko.se.api.component.AsyncAbstractCommand;
+import ru.volnenko.se.api.component.IInputProvider;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
-@Service("task-remove")
+@Component("task-remove")
 @Setter(onMethod=@__({@Autowired}))
-public final class TaskRemoveCommand implements AbstractCommand {
-    private IConsoleService console;
+public final class TaskRemoveCommand implements AsyncAbstractCommand {
+
+    private IInputProvider input;
 
     @Override
     public String description() {
@@ -23,7 +26,7 @@ public final class TaskRemoveCommand implements AbstractCommand {
     public void execute() {
         System.out.println("[REMOVING TASK]");
         System.out.println("Enter task order index:");
-        final Integer orderIndex = console.nextInteger();
+        final Integer orderIndex = input.nextInteger();
         if (orderIndex == null) {
             System.out.println("Error! Incorrect order index...");
             System.out.println();

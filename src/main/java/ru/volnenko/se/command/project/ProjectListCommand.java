@@ -2,17 +2,19 @@ package ru.volnenko.se.command.project;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+import ru.volnenko.se.api.component.AsyncAbstractCommand;
 import ru.volnenko.se.api.service.IProjectService;
-import ru.volnenko.se.command.AbstractCommand;
 import ru.volnenko.se.entity.Project;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
-@Service("project-list")
+@Component("project-list")
 @Setter(onMethod=@__({@Autowired}))
-public final class ProjectListCommand implements AbstractCommand {
+public final class ProjectListCommand implements AsyncAbstractCommand {
+
     private IProjectService projectService;
 
     @Override

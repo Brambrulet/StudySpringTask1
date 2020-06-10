@@ -9,6 +9,7 @@ import lombok.Data;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
 
 @Data

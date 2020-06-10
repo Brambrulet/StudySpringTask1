@@ -1,4 +1,4 @@
-package ru.volnenko.se.command;
+package ru.volnenko.se.api.component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -9,7 +9,11 @@ import java.nio.file.Files;
 import ru.volnenko.se.api.service.IDomainService;
 import ru.volnenko.se.entity.Domain;
 
-public abstract class AbstractSaveCommand extends AbstractCustomCommand {
+/**
+ * @author Shmelev Dmitry
+ */
+public abstract class AsyncAbstractSaveCommand extends AsyncAbstractCustomCommand {
+
     protected abstract IDomainService getDomainService();
     protected abstract String getFileName();
 

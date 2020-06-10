@@ -1,11 +1,15 @@
-package ru.volnenko.se.service;
+package ru.volnenko.se.component;
 
 import java.util.Scanner;
-import org.springframework.stereotype.Service;
-import ru.volnenko.se.api.service.IConsoleService;
+import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
+import ru.volnenko.se.api.component.IInputProvider;
 
-@Service
-public class ConsoleService implements IConsoleService {
+/**
+ * @author Shmelev Dmitry
+ */
+@Component
+public class InputProvider implements IInputProvider {
 
     private final Scanner scanner = new Scanner(System.in);
 
@@ -17,7 +21,7 @@ public class ConsoleService implements IConsoleService {
     @Override
     public Integer nextInteger() {
         final String value = nextLine();
-        if (value == null || value.isEmpty()) return null;
+        if (StringUtils.isEmpty(value)) return null;
         try {
             return Integer.parseInt(value);
         } catch (Exception e) {

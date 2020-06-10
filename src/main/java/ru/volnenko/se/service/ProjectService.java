@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
 @Service
 @Setter(onMethod=@__({@Autowired}))

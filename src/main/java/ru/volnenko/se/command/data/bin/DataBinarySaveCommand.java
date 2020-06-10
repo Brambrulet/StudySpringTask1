@@ -1,26 +1,27 @@
 package ru.volnenko.se.command.data.bin;
 
-import lombok.Setter;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import ru.volnenko.se.api.service.IProjectService;
-import ru.volnenko.se.api.service.ITaskService;
-import ru.volnenko.se.command.AbstractCommand;
-import ru.volnenko.se.constant.DataConstant;
-import ru.volnenko.se.entity.Project;
-import ru.volnenko.se.entity.Task;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
+import lombok.Setter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import ru.volnenko.se.api.component.AsyncAbstractCommand;
+import ru.volnenko.se.api.service.IProjectService;
+import ru.volnenko.se.api.service.ITaskService;
+import ru.volnenko.se.constant.DataConstant;
+import ru.volnenko.se.entity.Project;
+import ru.volnenko.se.entity.Task;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
-@Service("data-bin-save")
+@Component("data-bin-save")
 @Setter(onMethod=@__({@Autowired}))
-public final class DataBinarySaveCommand implements AbstractCommand {
+public final class DataBinarySaveCommand implements AsyncAbstractCommand {
+
     private IProjectService projectService;
     private ITaskService taskService;
 

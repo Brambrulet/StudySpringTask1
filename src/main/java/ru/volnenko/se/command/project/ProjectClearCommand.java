@@ -2,16 +2,18 @@ package ru.volnenko.se.command.project;
 
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
+import ru.volnenko.se.api.component.AsyncAbstractCommand;
 import ru.volnenko.se.api.repository.ITaskRepository;
-import ru.volnenko.se.command.AbstractCommand;
 
 /**
  * @author Denis Volnenko
+ * @author Shmelev Dmitry
  */
-@Service("project-clear")
+@Component("project-clear")
 @Setter(onMethod=@__({@Autowired}))
-public final class ProjectClearCommand implements AbstractCommand {
+public final class ProjectClearCommand implements AsyncAbstractCommand {
+
     private ITaskRepository taskRepository;
 
     @Override
