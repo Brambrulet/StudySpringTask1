@@ -4,16 +4,16 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
-import ru.volnenko.se.api.component.AbstractCommand;
-import ru.volnenko.se.api.component.AsyncAbstractCommand;
+import ru.volnenko.se.api.command.ICommand;
+import ru.volnenko.se.api.command.IRegularCommand;
 
 /**
  * @author Denis Volnenko
  * @author Shmelev Dmitry
  */
 @Component("help")
-@Setter(onMethod=@__({@Autowired}))
-public class HelpCommand implements AsyncAbstractCommand {
+@Setter(onMethod_=@Autowired)
+public class HelpCommandI implements IRegularCommand {
 
     private ApplicationContext context;
 
@@ -24,11 +24,10 @@ public class HelpCommand implements AsyncAbstractCommand {
 
     @Override
     public void execute() {
-        System.out.println(Thread.currentThread().getName());
-        context.getBeansOfType(AbstractCommand.class).forEach(this::printCommandInfo);
+        context.getBeansOfType(ICommand.class).forEach(this::printCommandInfo);
     }
 
-    private void printCommandInfo(String command, AbstractCommand bean) {
+    private void printCommandInfo(String command, ICommand bean) {
         System.out.println(command + ": " + bean.description());
     }
 

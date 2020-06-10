@@ -3,19 +3,16 @@ package ru.volnenko.se.command.task;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.volnenko.se.api.component.AbstractCommand;
-import ru.volnenko.se.api.component.AsyncAbstractCommand;
-import ru.volnenko.se.api.component.IInputProvider;
+import org.springframework.util.StringUtils;
+import ru.volnenko.se.api.command.InputPendingCommand;
 
 /**
  * @author Denis Volnenko
  * @author Shmelev Dmitry
  */
 @Component("task-remove")
-@Setter(onMethod=@__({@Autowired}))
-public final class TaskRemoveCommand implements AsyncAbstractCommand {
-
-    private IInputProvider input;
+@Setter(onMethod_=@Autowired)
+public final class TaskRemoveCommand extends InputPendingCommand {
 
     @Override
     public String description() {
@@ -23,11 +20,14 @@ public final class TaskRemoveCommand implements AsyncAbstractCommand {
     }
 
     @Override
-    public void execute() {
+    public void prepare() {
         System.out.println("[REMOVING TASK]");
         System.out.println("Enter task order index:");
-        final Integer orderIndex = input.nextInteger();
-        if (orderIndex == null) {
+    }
+
+    @Override
+    public void execute(String inputValue) {
+        if (stringToInteger(inputValue) == null) {
             System.out.println("Error! Incorrect order index...");
             System.out.println();
             return;
@@ -35,4 +35,12 @@ public final class TaskRemoveCommand implements AsyncAbstractCommand {
         System.out.println("[OK]");
     }
 
+    private Integer stringToInteger(String inputValue) {
+        if (StringUtils.isEmpty(inputValue)) return null;
+        try {
+            return Integer.parseInt(inputValue);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }

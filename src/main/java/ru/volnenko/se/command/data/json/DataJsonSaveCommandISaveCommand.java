@@ -1,36 +1,36 @@
 package ru.volnenko.se.command.data.json;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.volnenko.se.api.service.IDomainService;
-import ru.volnenko.se.api.component.AsyncAbstractLoadCommand;
+import ru.volnenko.se.api.command.ISaveCommand;
+import ru.volnenko.se.constant.DataConstant;
 
 /**
  * @author Denis Volnenko
  * @author Shmelev Dmitry
  */
-@Component("data-json-load")
-@Setter(onMethod=@__({@Autowired}))
+@Component("data-json-save")
+@Setter(onMethod_=@Autowired)
 @Getter
-public final class DataJsonLoadCommand extends AsyncAbstractLoadCommand {
+public final class DataJsonSaveCommandISaveCommand extends ISaveCommand {
 
     private IDomainService domainService;
 
     @Override
     public String description() {
-        return "Load Domain from JSON.";
+        return "Save Domain to JSON.";
     }
 
     @Override
-    protected ObjectMapper newObjectMapper() {
-        return new ObjectMapper();
+    protected String getFileName() {
+        return DataConstant.FILE_JSON;
     }
 
     @Override
     protected String message() {
-        return "[LOAD JSON DATA]";
+        return "[DATA JSON SAVE]";
     }
 }

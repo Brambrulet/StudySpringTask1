@@ -11,8 +11,8 @@ import org.springframework.context.event.DefaultEventListenerFactory;
 import org.springframework.context.event.EventListenerFactory;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
-import ru.volnenko.se.api.service.IBootstrap;
-import ru.volnenko.se.api.component.AbstractCommand;
+import ru.volnenko.se.api.component.IInputProvider;
+import ru.volnenko.se.api.command.ICommand;
 import ru.volnenko.se.error.CommandAbsentException;
 
 /**
@@ -36,7 +36,7 @@ public class App {
                     @Override
                     protected String getCondition() {
                         String condition = super.getCondition();
-                        return !AbstractCommand.class.isAssignableFrom(type) || condition == null
+                        return !ICommand.class.isAssignableFrom(type) || condition == null
                                 ? condition : condition.replace("#command", "'" + command + "'");
                     }
                 };
@@ -57,10 +57,9 @@ public class App {
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(App.class);
-        if (context.getBeansOfType(AbstractCommand.class).isEmpty()) {
+        if (context.getBeansOfType(ICommand.class).isEmpty()) {
             throw new CommandAbsentException();
         }
-        context.getBean(IBootstrap.class).start();
+        context.getBean(IInputProvider.class).start();
     }
-
 }

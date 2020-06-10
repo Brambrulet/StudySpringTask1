@@ -3,7 +3,7 @@ package ru.volnenko.se.command.data.xml;
 import java.io.File;
 import java.nio.file.Files;
 import org.springframework.stereotype.Component;
-import ru.volnenko.se.api.component.AsyncAbstractCommand;
+import ru.volnenko.se.api.command.IRegularCommand;
 import ru.volnenko.se.constant.DataConstant;
 
 /**
@@ -11,7 +11,7 @@ import ru.volnenko.se.constant.DataConstant;
  * @author Shmelev Dmitry
  */
 @Component("data-xml-clear")
-public final class DataXmlClearCommand implements AsyncAbstractCommand {
+public final class DataXmlClearCommandI implements IRegularCommand {
 
     @Override
     public String description() {

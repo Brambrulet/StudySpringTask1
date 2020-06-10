@@ -17,7 +17,7 @@ import java.util.List;
  * @author Shmelev Dmitry
  */
 @Service
-@Setter(onMethod=@__({@Autowired}))
+@Setter(onMethod_=@Autowired)
 public final class TaskService implements ITaskService {
 
     private ITaskRepository taskRepository;
