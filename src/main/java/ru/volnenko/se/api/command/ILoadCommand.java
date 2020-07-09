@@ -1,4 +1,4 @@
-package ru.volnenko.se.api.component;
+package ru.volnenko.se.api.command;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.File;
@@ -11,11 +11,13 @@ import ru.volnenko.se.entity.Domain;
 /**
  * @author Shmelev Dmitry
  */
-public abstract class AsyncAbstractLoadCommand extends AsyncAbstractCustomCommand {
+public abstract class ILoadCommand implements IRegularCommand {
 
     protected abstract ObjectMapper newObjectMapper();
 
     protected abstract IDomainService getDomainService();
+
+    protected abstract String message();
 
     @Override
     public void execute() throws Exception {

@@ -13,7 +13,7 @@ import ru.volnenko.se.entity.Domain;
  * @author Shmelev Dmitry
  */
 @Service
-@Setter(onMethod=@__({@Autowired}))
+@Setter(onMethod_=@Autowired)
 public final class DomainService implements IDomainService {
 
     private IProjectService projectService;

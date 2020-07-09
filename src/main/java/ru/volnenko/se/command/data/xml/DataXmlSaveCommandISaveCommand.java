@@ -5,7 +5,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.volnenko.se.api.service.IDomainService;
-import ru.volnenko.se.api.component.AsyncAbstractSaveCommand;
+import ru.volnenko.se.api.command.ISaveCommand;
 import ru.volnenko.se.constant.DataConstant;
 
 /**
@@ -13,9 +13,9 @@ import ru.volnenko.se.constant.DataConstant;
  * @author Shmelev Dmitry
  */
 @Component("data-xml-save")
-@Setter(onMethod=@__({@Autowired}))
+@Setter(onMethod_=@Autowired)
 @Getter
-public final class DataXmlSaveCommand extends AsyncAbstractSaveCommand {
+public final class DataXmlSaveCommandISaveCommand extends ISaveCommand {
 
     private IDomainService domainService;
 

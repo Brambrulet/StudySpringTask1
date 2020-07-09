@@ -7,7 +7,7 @@ import java.nio.file.Files;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import ru.volnenko.se.api.component.AsyncAbstractCommand;
+import ru.volnenko.se.api.command.IRegularCommand;
 import ru.volnenko.se.api.service.IProjectService;
 import ru.volnenko.se.api.service.ITaskService;
 import ru.volnenko.se.constant.DataConstant;
@@ -19,8 +19,8 @@ import ru.volnenko.se.entity.Task;
  * @author Shmelev Dmitry
  */
 @Component("data-bin-save")
-@Setter(onMethod=@__({@Autowired}))
-public final class DataBinarySaveCommand implements AsyncAbstractCommand {
+@Setter(onMethod_=@Autowired)
+public final class DataBinarySaveCommandI implements IRegularCommand {
 
     private IProjectService projectService;
     private ITaskService taskService;

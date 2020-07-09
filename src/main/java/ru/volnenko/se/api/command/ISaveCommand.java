@@ -1,4 +1,4 @@
-package ru.volnenko.se.api.component;
+package ru.volnenko.se.api.command;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
@@ -12,10 +12,13 @@ import ru.volnenko.se.entity.Domain;
 /**
  * @author Shmelev Dmitry
  */
-public abstract class AsyncAbstractSaveCommand extends AsyncAbstractCustomCommand {
+public abstract class ISaveCommand implements IRegularCommand {
 
     protected abstract IDomainService getDomainService();
     protected abstract String getFileName();
+
+
+    protected abstract String message();
 
     @Override
     public void execute() throws Exception {
