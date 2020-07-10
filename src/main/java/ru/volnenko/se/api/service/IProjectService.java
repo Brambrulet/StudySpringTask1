@@ -1,5 +1,6 @@
 package ru.volnenko.se.api.service;
 
+import java.util.Optional;
 import ru.volnenko.se.entity.Project;
 
 import java.util.Collection;
@@ -12,22 +13,19 @@ public interface IProjectService {
 
     Project createProject(String name);
 
-    Project merge(Project project);
+    Project saveAll(Project project);
 
-    Project getProjectById(String id);
+    Optional<Project> findById(String id);
 
-    void removeProjectById(String id);
+    void deleteById(String id);
 
     List<Project> getListProject();
 
-    void clear();
+    void deleteAll();
 
-    void merge(Project... projects);
+    void saveAll(Project... projects);
 
-    void load(Collection<Project> projects);
+    void saveAll(Collection<Project> projects);
 
-    void load(Project... projects);
-
-    Project removeByOrderIndex(Integer orderIndex);
-
+    void deleteAllByTaskName(String taskName);
 }

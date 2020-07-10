@@ -1,16 +1,18 @@
 package ru.volnenko.se.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.volnenko.se.api.repository.IProjectRepository;
-import ru.volnenko.se.api.repository.ITaskRepository;
+import org.springframework.transaction.annotation.Transactional;
 import ru.volnenko.se.api.service.ITaskService;
 import ru.volnenko.se.entity.Project;
 import ru.volnenko.se.entity.Task;
-
-import java.util.Collection;
-import java.util.List;
+import ru.volnenko.se.repository.ProjectRepository;
+import ru.volnenko.se.repository.TaskRepository;
 
 /**
  * @author Denis Volnenko
@@ -18,74 +20,62 @@ import java.util.List;
  */
 @Service
 @Setter(onMethod_=@Autowired)
-public final class TaskService implements ITaskService {
+public class TaskService implements ITaskService {
 
-    private ITaskRepository taskRepository;
-    private IProjectRepository projectRepository;
+    private TaskRepository taskRepository;
+    private ProjectRepository projectRepository;
 
     @Override
+    @Transactional
     public Task createTask(final String name) {
         if (name == null || name.isEmpty()) return null;
-        return taskRepository.createTask(name);
+        return taskRepository.save(new Task().setName(name));
     }
 
     @Override
+    @Transactional
     public Task getTaskById(final String id) {
-        return taskRepository.getTaskById(id);
+        return taskRepository.findById(id).orElse(null);
     }
 
     @Override
-    public Task merge(final Task task) {
-        return taskRepository.merge(task);
-    }
-
-    @Override
+    @Transactional
     public void removeTaskById(final String id) {
-        taskRepository.removeTaskById(id);
+        taskRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public List<Task> getListTask() {
-        return taskRepository.getListTask();
+        List<Task> tasks = new ArrayList<>();
+        taskRepository.findAll().forEach(tasks::add);
+
+        return tasks;
     }
 
     @Override
+    @Transactional
     public void clear() {
-        taskRepository.clear();
+        taskRepository.deleteAll();
     }
 
     @Override
+    @Transactional
     public Task createTaskByProject(final String projectId, final String taskName) {
-        final Project project = projectRepository.getProjectById(projectId);
+        final Project project = projectRepository.findById(projectId).orElse(null);
         if (project == null) return null;
-        final Task task = taskRepository.createTask(taskName);
-        task.setProjectId(project.getId());
-        return task;
+        return taskRepository.save(new Task().setProjectId(taskName));
     }
 
     @Override
-    public Task getByOrderIndex(Integer orderIndex) {
-        return taskRepository.getByOrderIndex(orderIndex);
-    }
-
-    @Override
-    public void merge(Task... tasks) {
-        taskRepository.merge(tasks);
-    }
-
-    @Override
+    @Transactional
     public void load(Task... tasks) {
-        taskRepository.load(tasks);
+        taskRepository.saveAll(Arrays.asList(tasks));
     }
 
     @Override
+    @Transactional
     public void load(Collection<Task> tasks) {
-        taskRepository.load(tasks);
+        taskRepository.saveAll(tasks);
     }
-
-    @Override
-    public void removeTaskByOrderIndex(Integer orderIndex) {
-        taskRepository.removeTaskByOrderIndex(orderIndex);
-    }
-
 }

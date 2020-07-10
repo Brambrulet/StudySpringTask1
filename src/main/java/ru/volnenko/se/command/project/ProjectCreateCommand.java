@@ -4,7 +4,7 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.volnenko.se.api.command.InputPendingCommand;
-import ru.volnenko.se.api.repository.IProjectRepository;
+import ru.volnenko.se.api.service.IProjectService;
 
 /**
  * @author Denis Volnenko
@@ -15,7 +15,7 @@ import ru.volnenko.se.api.repository.IProjectRepository;
 public final class ProjectCreateCommand extends InputPendingCommand {
 
     //private IInputProvider input;
-    private IProjectRepository projectRepository;
+    private IProjectService projectService;
 
     @Override
     public String description() {
@@ -30,7 +30,7 @@ public final class ProjectCreateCommand extends InputPendingCommand {
 
     @Override
     public void execute(String name) {
-        projectRepository.createProject(name);
+        projectService.createProject(name);
         System.out.println("[OK]");
         System.out.println();
     }
