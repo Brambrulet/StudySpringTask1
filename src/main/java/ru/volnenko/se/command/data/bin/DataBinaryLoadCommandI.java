@@ -43,7 +43,7 @@ public final class DataBinaryLoadCommandI implements IRegularCommand {
     private void loadProjects(final Object value) {
         if (!(value instanceof Project[])) return;
         final Project[] projects = (Project[]) value;
-        projectService.load(projects);
+        projectService.saveAll(projects);
     }
 
     private void loadTasks(final Object value) {

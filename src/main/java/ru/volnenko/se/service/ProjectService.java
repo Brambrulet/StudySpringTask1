@@ -1,13 +1,19 @@
 package ru.volnenko.se.service;
 
+import com.sun.deploy.util.ArrayUtil;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.volnenko.se.api.repository.IProjectRepository;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 import ru.volnenko.se.entity.Project;
 
 import java.util.Collection;
 import java.util.List;
+import ru.volnenko.se.repository.ProjectRepository;
 
 /**
  * @author Denis Volnenko
@@ -15,60 +21,68 @@ import java.util.List;
  */
 @Service
 @Setter(onMethod_=@Autowired)
-public final class ProjectService implements ru.volnenko.se.api.service.IProjectService {
+public class ProjectService implements ru.volnenko.se.api.service.IProjectService {
 
-    private IProjectRepository projectRepository;
+    private ProjectRepository projectRepository;
 
     @Override
+    @Transactional
     public Project createProject(final String name) {
         if (name == null || name.isEmpty()) return null;
-        return projectRepository.createProject(name);
+        return projectRepository.save(new Project().setName(name));
     }
 
     @Override
-    public Project merge(final Project project) {
-        return projectRepository.merge(project);
+    @Transactional
+    public Project saveAll(final Project project) {
+        return projectRepository.save(project);
     }
 
     @Override
-    public Project getProjectById(final String id) {
-        return projectRepository.getProjectById(id);
+    @Transactional
+    public Optional<Project> findById(final String id) {
+        return projectRepository.findById(id);
     }
 
     @Override
-    public void removeProjectById(final String id) {
-        projectRepository.removeProjectById(id);
+    @Transactional
+    public void deleteById(final String id) {
+        projectRepository.deleteById(id);
     }
 
     @Override
+    @Transactional
     public List<Project> getListProject() {
-        return projectRepository.getListProject();
+        List<Project> projects = new ArrayList<>();
+        projectRepository.findAll().forEach(projects::add);
+
+        return projects;
     }
 
     @Override
-    public void clear() {
-        projectRepository.clear();
+    @Transactional
+    public void deleteAll() {
+        projectRepository.deleteAll();
     }
 
     @Override
-    public void merge(Project... projects) {
-        projectRepository.merge(projects);
+    @Transactional
+    public void saveAll(Project... projects) {
+        projectRepository.saveAll(Arrays.asList(projects));
     }
 
     @Override
-    public void load(Collection<Project> projects) {
-        projectRepository.load(projects);
+    @Transactional
+    public void saveAll(Collection<Project> projects) {
+        projectRepository.saveAll(projects);
     }
 
     @Override
-    public void load(Project... projects) {
-        projectRepository.load(projects);
-    }
+    @Transactional
+    public void deleteAllByTaskName(String taskName) {
+        assert StringUtils.isEmpty(taskName);
 
-    @Override
-    public Project removeByOrderIndex(Integer orderIndex) {
-        if (orderIndex == null) return null;
-        return projectRepository.removeByOrderIndex(orderIndex);
+        projectRepository.deleteAllByTaskName(taskName);
     }
 
 }

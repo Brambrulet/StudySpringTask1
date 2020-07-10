@@ -22,7 +22,7 @@ public final class DomainService implements IDomainService {
     @Override
     public void load(final Domain domain) {
         if (domain == null) return;
-        projectService.load(domain.getProjects());
+        projectService.saveAll(domain.getProjects());
         taskService.load(domain.getTasks());
     }
 

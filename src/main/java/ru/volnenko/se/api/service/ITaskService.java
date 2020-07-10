@@ -14,8 +14,6 @@ public interface ITaskService {
 
     Task getTaskById(String id);
 
-    Task merge(Task task);
-
     void removeTaskById(String id);
 
     List<Task> getListTask();
@@ -24,14 +22,8 @@ public interface ITaskService {
 
     Task createTaskByProject(String projectId, String taskName);
 
-    Task getByOrderIndex(Integer orderIndex);
-
-    void merge(Task... tasks);
-
     void load(Task... tasks);
 
     void load(Collection<Task> tasks);
-
-    void removeTaskByOrderIndex(Integer orderIndex);
 
 }
